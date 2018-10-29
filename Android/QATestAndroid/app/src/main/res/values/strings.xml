@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">QATestAndroid</string>
+    <string name="fooName">Foo</string>
+    <string name="barName">Bar</string>
+</resources>
