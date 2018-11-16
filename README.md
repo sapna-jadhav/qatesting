@@ -62,9 +62,11 @@ Finally run this script with the following command:
 bash TestAPI.sh
 
 15. Add to the script a new curl POST command to /posts with a JSON body that has an id of 1000, a title of qatest, body of hello, and userId of 4.
+
 ANS:url -H "Content-Type: application/json" -X POST -d '{"id":"1000","title":"qatest","body":""hello,userId:"4"}' https://jsonplaceholder.typicode.com/posts
 
 16. Add to the script a new curl GET command to /posts that uses a querystring for userId as 5.
+
 ANS: curl 'https://developer.nrel.gov/api/alt-fuel-stations/v1.json?userId=5'
 
 17. BONUS: Modify your requests to pretend they are coming from an Android browser.
@@ -101,9 +103,67 @@ if (driver.findElements(By.partialLinkText("Quality_assurance")).size() >0){
 
 19. Modify the script to contain two tests, where the second test loads http://automationpractice.com/index.php?controller=authentication&back=my-account and signs in with qa@testing.com / 123456, waits for 5 seconds, then verifies signing in has succeeded.
 
+ANS: 
+class Program
+    {
+        static void Main(string[] args)
+        {
+try
+{
+            IWebDriver driver = new FirefoxDriver();
+            driver.Navigate().GoToUrl("http://automationpractice.com/index.php?controller=authentication&back=my-account");
+ 	     driver.FindElement(By.XPath("//*[@id="header"]/div[2]/div/div/nav/div[1]/a")).Click();
+            driver.FindElement(By.Id("qa@testing.com")).SendKeys("email");
+            driver.FindElement(By.Id("123456")).SendKeys("password");
+            driver.FindElement(By.Id("SubmitLogin")).Click();
+	    //wait 5 secs for userid to be entered
+	    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+	    Assert.AreEqual("My account - My Store",GlobalDriver.driver.Title);
+		System.out.println("Login Successfull")
+}
+
+ catch (Exception ex)
+    {
+        Console.WriteLine(@"Exception caught, Login failed: " + ex.ToString());
+        Assert.Fail();
+    }  
+
+
+        }
+    }
+    
+	    
 20. BONUS: Write a shell script "TestSelenium" that checks/installs any dependencies and then leads to Selenium running the above scripts for firefox and chrome.
 
-**Programming**NS
+ANS:
+	# Easy way to check for dependencies
+checkfor () {
+    command -v $1 >/dev/null 2>&1 || { 
+        echo >&2 "$1 required"; 
+        exit 1; 
+    }
+}
+checkfor "ffmpeg"
+
+
+# example using an array of dependencies
+array=( "convert" "ffmpeg" )
+for i in "${array[@]}"
+do
+    command -v $i >/dev/null 2>&1 || { 
+        echo >&2 "$1 required"; 
+        exit 1; 
+    }
+done
+
+OR
+
+if command -v nodejs >/dev/null 2>&1 ; then
+    echo "nodejs found"
+    echo "version: $(nodejs -v)"
+else
+    echo "nodejs not found"
+fi
 
 21. Given the javascript code below; what gets printed and why? Can you rewrite the code to make it better somehow? (if so, explain why it's better)
     var x = 1;
