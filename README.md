@@ -60,11 +60,13 @@ Save the file with a file name ending with .sh e.g. TestAPI.sh
 Finally run this script with the following command:
 
 bash TestAPI.sh
+
 15. Add to the script a new curl POST command to /posts with a JSON body that has an id of 1000, a title of qatest, body of hello, and userId of 4.
 ANS:url -H "Content-Type: application/json" -X POST -d '{"id":"1000","title":"qatest","body":""hello,userId:"4"}' https://jsonplaceholder.typicode.com/posts
 
 16. Add to the script a new curl GET command to /posts that uses a querystring for userId as 5.
 ANS: curl 'https://developer.nrel.gov/api/alt-fuel-stations/v1.json?userId=5'
+
 17. BONUS: Modify your requests to pretend they are coming from an Android browser.
 
 **Web UI Testing**
